@@ -1,0 +1,18 @@
+
+/*Save the max length of a packet in a flow. If the current packet is bigger, it saves the packet in a register. Otherwise, it does nothing.*/
+action checksum_error_counter(bit<32> i) {
+
+action max_length(bit<32> i) {
+
+  bit<32> max_length_pkt;
+  bit<32> update_value;
+  max_length_reg.read(max_length_pkt, i);
+
+    if(standard_metadata.packet_length > max_length_pkt)
+      update_value = standard_metadata.packet_length;
+
+    else
+      update_value = max_length_pkt;
+
+  max_length_reg.write(update_value, i);
+}

@@ -1,0 +1,11 @@
+
+/*adds 1 to the total of packets in a flow*/
+action packet_counter(bit<32> i){
+
+  bit<32> packet_cnt;
+
+ packet_cnt_reg.read(packet_cnt, i);
+ packet_cnt = packet_cnt + 1;
+ packet_cnt_reg.write(i, packet_cnt);
+
+}

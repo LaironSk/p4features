@@ -1,0 +1,13 @@
+
+/*drop a packet and add 1 to a register that counts the number of packet drops*/
+action drop(bit<32> i) {
+
+  bit<32> drop_cnt;
+
+    mark_to_drop(standard_metadata);
+
+    drop_cnt_reg.read(drop_cnt, i);
+    drop_cnt = drop_cnt + 1;
+    drop_cnt_reg.write(i, drop_cnt);
+
+}

@@ -1,0 +1,18 @@
+
+/*Save the min length of a packet in a flow. If the current packet is smaller, it saves the packet in a register. Otherwise, it does nothing.*/
+action checksum_error_counter(bit<32> i) {
+
+action min_length(bit<32> i) {
+
+  bit<32> min_length_pkt;
+  bit<32> update_value;
+  min_length_reg.read(min_length_pkt, i);
+
+    if(standard_metadata.packet_length > min_length_pkt)
+      update_value = min_length_pkt;
+
+    else
+      update_value = standard_metadata.packet_length;
+
+  min_length_reg.write(update_value, i);
+}

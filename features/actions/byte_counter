@@ -1,0 +1,11 @@
+
+/*adds the length of a packet in a register of the total sum of bytes in a flow*/
+action byte_counter(bit<32> i){
+
+  bit<32> byte_cnt;
+
+ byte_cnt_reg.read(byte_cnt, i);
+ byte_cnt = byte_cnt + standard_metadata.packet_length;
+ byte_cnt_reg.write(i, byte_cnt);
+
+}

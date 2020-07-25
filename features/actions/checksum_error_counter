@@ -1,0 +1,16 @@
+
+/*calls the primitive checksum_error. If the value is 1, adds one to the checksum error counter. Else, does nothing.*/
+action checksum_error_counter(bit<32> i) {
+
+  bit<32> checksum_cnt;
+
+    if(standard_metadata.checksum_error == 1) {
+      checksum_cnt_reg.read(checksum_cnt, i);
+      checksum_cnt = checksum_cnt + 1;
+      }
+    else
+      checksum_cnt_reg.read(checksum_cnt, i);
+
+    checksum_cnt_reg.write(i, checksum_cnt);
+
+}
